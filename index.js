@@ -28,6 +28,12 @@ app.get('/api/poruke/:id', (req, res) => {
     }
 })
 
+app.delete('/api/poruke/:id', (req, res) => {
+    const id = Number(req.params.id)
+    poruke = poruke.filter(p => p.id !== id)
+    res.status(204).end()
+})
+
 const PORT = 3001
 app.listen(PORT, () => {
     console.log(`Posložitelj je pokrenut na portu ${PORT}`);
