@@ -17,11 +17,18 @@ let poruke = [
  }
 ]
 
-app.get('/api/poruke', (req, res) => {
-    res.json(poruke)
+app.get('/api/poruke/:id', (req, res) => {
+    const id = Number(req.params.id)
+    const poruka = poruke.find(p => p.id === id)
+    
+    if(poruka){
+        res.json(poruke)
+    } else{
+        res.status(404).end()
+    }
 })
 
 const PORT = 3001
 app.listen(PORT, () => {
-    console.log('Posložitelj je pokrenut na portu ${PORT}');
+    console.log(`Posložitelj je pokrenut na portu ${PORT}`);
 })
