@@ -1,5 +1,7 @@
 //ekvivalent naredbi import; http biblioteka koja je ugrađena u node.js
-const http = require('http')
+const express = require('express')
+const app = express()
+
 let poruke = [
  {
  id: 1,
@@ -14,10 +16,12 @@ let poruke = [
  sadrzaj: 'GET i POST su najvaznije metode HTTP protokola',
  }
 ]
-const app = http.createServer((req, res) =>{
- res.writeHead(200, {'Content-Type': 'application/json'})
- res.end(JSON.stringify(poruke))
+
+app.get('/api/poruke', (req, res) => {
+    res.json(poruke)
 })
+
 const PORT = 3001
-app.listen(PORT)
-console.log(`Posluzitelj je pokrenut na portu ${PORT}`);
+app.listen(PORT, () => {
+    console.log('Posložitelj je pokrenut na portu ${PORT}');
+})
